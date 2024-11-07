@@ -5,7 +5,6 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("HUI");
         ISongCatalog songCatalog = new SongCatalog("/Users/40404040404040l/RiderProjects/design-programminglanguage-csharp/Lab1Design/Lab1Design/songs.json");
         var consolePrinter = new ConsolePrinter();
         consolePrinter.Greet();
