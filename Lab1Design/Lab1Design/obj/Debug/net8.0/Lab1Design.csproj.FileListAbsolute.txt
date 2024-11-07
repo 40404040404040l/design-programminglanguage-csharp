@@ -26,3 +26,10 @@
 /Users/40404040404040l/RiderProjects/design-programminglanguage-csharp/Lab1Design/Lab1Design/obj/Debug/net8.0/Lab1Design.pdb
 /Users/40404040404040l/RiderProjects/design-programminglanguage-csharp/Lab1Design/Lab1Design/obj/Debug/net8.0/Lab1Design.genruntimeconfig.cache
 /Users/40404040404040l/RiderProjects/design-programminglanguage-csharp/Lab1Design/Lab1Design/obj/Debug/net8.0/ref/Lab1Design.dll
+/Users/40404040404040l/RiderProjects/design-programminglanguage-csharp/Lab1Design/Lab1Design/obj/Debug/net8.0/Lab1Design.sourcelink.json
+/Users/40404040404040l/RiderProjects/design-programminglanguage-csharp/Lab1Design/Lab1Design/bin/Debug/net8.0/xunit.abstractions.dll
+/Users/40404040404040l/RiderProjects/design-programminglanguage-csharp/Lab1Design/Lab1Design/bin/Debug/net8.0/xunit.assert.dll
+/Users/40404040404040l/RiderProjects/design-programminglanguage-csharp/Lab1Design/Lab1Design/bin/Debug/net8.0/xunit.core.dll
+/Users/40404040404040l/RiderProjects/design-programminglanguage-csharp/Lab1Design/Lab1Design/bin/Debug/net8.0/xunit.execution.dotnet.dll
+/Users/40404040404040l/RiderProjects/design-programminglanguage-csharp/Lab1Design/Lab1Design/obj/Debug/net8.0/Lab1Design.csproj.AssemblyReference.cache
+/Users/40404040404040l/RiderProjects/design-programminglanguage-csharp/Lab1Design/Lab1Design/obj/Debug/net8.0/Lab1Design.csproj.Up2Date
