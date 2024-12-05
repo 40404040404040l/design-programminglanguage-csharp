@@ -26,6 +26,10 @@ namespace Lab3Design.Controllers
         [HttpGet("search")]
         public async Task<ActionResult<List<Song>>> GetSongsByCriteria(string criteria)
         {
+            if (string.IsNullOrEmpty(criteria))
+            {
+                return BadRequest("Criteria is required.");
+            }
             var songs = await _repository.GetSongsByCriteriaAsync(criteria);
             return Ok(songs);
         }
@@ -45,6 +49,10 @@ namespace Lab3Design.Controllers
         [HttpDelete]
         public async Task<ActionResult> DeleteSong([FromBody] SongDto songDto)
         {
+            if (string.IsNullOrWhiteSpace(songDto.Name) || string.IsNullOrWhiteSpace(songDto.Author))
+            {
+                return BadRequest("Name and Author are required.");
+            }
             await _repository.DeleteSongAsync(songDto.Name, songDto.Author);
             return NoContent();
         }
