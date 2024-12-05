@@ -1,0 +1,87 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/40404040404040l/RiderProjects/design-programminglanguage-csharp/Lab3Design/Lab3Design/Lab3Design.csproj": {}
+  },
+  "projects": {
+    "/Users/40404040404040l/RiderProjects/design-programminglanguage-csharp/Lab3Design/Lab3Design/Lab3Design.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/40404040404040l/RiderProjects/design-programminglanguage-csharp/Lab3Design/Lab3Design/Lab3Design.csproj",
+        "projectName": "Lab3Design",
+        "projectPath": "/Users/40404040404040l/RiderProjects/design-programminglanguage-csharp/Lab3Design/Lab3Design/Lab3Design.csproj",
+        "packagesPath": "/Users/40404040404040l/.nuget/packages/",
+        "outputPath": "/Users/40404040404040l/RiderProjects/design-programminglanguage-csharp/Lab3Design/Lab3Design/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/40404040404040l/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.OpenApi": {
+              "target": "Package",
+              "version": "[8.0.10, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[9.0.1, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.6.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.403/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
