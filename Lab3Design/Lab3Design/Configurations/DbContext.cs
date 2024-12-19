@@ -1,17 +1,26 @@
-using Lab3Design.Models.Songs;
 using Microsoft.EntityFrameworkCore;
+using Lab3Design.Models.Songs;
 
 namespace Lab3Design.Configurations;
 
 public class DbContext : Microsoft.EntityFrameworkCore.DbContext
 {
     public DbSet<Song> songs { get; set; }
-    
+
+    private readonly IConfiguration _configuration;
+
+    public DbContext(DbContextOptions<DbContext> options, IConfiguration configuration)
+        : base(options)
+    {
+        _configuration = configuration;
+    }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseNpgsql("User ID=myuser;Password=123123;Host=localhost;Port=5432;Database=postgres;");
+        var dbConnectionString = _configuration.GetConnectionString("DbConnectionString");
+        optionsBuilder.UseNpgsql(dbConnectionString);
     }
-    
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Song>(builder =>

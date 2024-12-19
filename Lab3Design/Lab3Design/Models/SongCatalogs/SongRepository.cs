@@ -1,4 +1,3 @@
-using Lab3Design.Configurations;
 using Lab3Design.Models.Songs;
 using Microsoft.EntityFrameworkCore;
 using DbContext = Lab3Design.Configurations.DbContext;
@@ -6,33 +5,49 @@ using DbContext = Lab3Design.Configurations.DbContext;
 
 namespace Lab3Design.Models.SongCatalogs;
 
-public class SongRepository
+public class SongRepository : ISongRepository
 {
-    private readonly DbContext _dbContext = new DbContext();
+    private readonly DbContext _dbContext;
+    
+    public SongRepository(DbContext dbContext)
+    {
+        _dbContext = dbContext;
+    }
 
     public async Task<List<Song>> GetSongsAsync()
     {
-        return await _dbContext.songs.AsNoTracking().ToListAsync();
+        return await _dbContext.songs.ToListAsync();
     }
 
     public async Task<List<Song>> GetSongsByCriteriaAsync(string criteria)
     {
         return await _dbContext
             .songs
-            .AsNoTracking()
             .Where(song => song.Name.Contains(criteria) || song.Author.Contains(criteria))
             .ToListAsync();
     }
 
-    public async Task AddSongAsync(string name, string author)
+    public async Task<Song> AddSongAsync(string name, string author)
     {
         var song = new Song(name, author);
-        await _dbContext.AddAsync(song);
+        var addedSong = await _dbContext.AddAsync(song);
         await _dbContext.SaveChangesAsync();
+        return addedSong.Entity;
     }
 
-    public async Task DeleteSongAsync(string name, string author)
+    public async Task<bool> DeleteSongAsync(string name, string author)
     {
-        await _dbContext.songs.Where(song => song.Name == name && song.Author == author).ExecuteDeleteAsync();
+        var song = await _dbContext.songs
+            .FirstOrDefaultAsync(song => song.Name == name && song.Author == author);
+
+        if (song == null)
+        {
+            return false;
+        }
+
+        _dbContext.songs.Remove(song);
+        await _dbContext.SaveChangesAsync();
+        return true;
     }
+
 }

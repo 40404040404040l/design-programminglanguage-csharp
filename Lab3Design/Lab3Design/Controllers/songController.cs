@@ -1,59 +1,73 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Lab3Design.Configurations;
 using Lab3Design.Models.SongCatalogs;
-using Lab3Design.Models.Songs;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Lab3Design.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]/[action]")]
     public class SongsController : ControllerBase
     {
-        private readonly SongRepository _repository = new ();
+        private readonly ISongRepository _repository;
+
+        public SongsController(ISongRepository repository)
+        {
+            _repository = repository;
+        }
 
         [HttpGet]
-        public async Task<ActionResult<List<Song>>> GetSongs()
+        public async Task<IActionResult> GetSongs()
         {
             var songs = await _repository.GetSongsAsync();
+            if (songs.Count == 0)
+            {
+                return NotFound("No songs found.");
+            }
+        
             return Ok(songs);
         }
         
-        [HttpGet("search")]
-        public async Task<ActionResult<List<Song>>> GetSongsByCriteria(string criteria)
+        [HttpGet]
+        public async Task<IActionResult> GetSongsByCriteria(string criteria)
         {
-            if (string.IsNullOrEmpty(criteria))
-            {
-                return BadRequest("Criteria is required.");
-            }
             var songs = await _repository.GetSongsByCriteriaAsync(criteria);
+        
+            if (songs.Count == 0)
+            {
+                return NotFound($"No songs found for criteria: {criteria}.");
+            }
+        
             return Ok(songs);
         }
         
+
         [HttpPost]
-        public async Task<ActionResult<Song>> AddSong([FromBody] SongDto songDto)
+        public async Task<IActionResult> AddSong([FromQuery] string name, [FromQuery] string author)
         {
-            if (string.IsNullOrWhiteSpace(songDto.Name) || string.IsNullOrWhiteSpace(songDto.Author))
+            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(author))
             {
                 return BadRequest("Name and Author are required.");
             }
-        
-            await _repository.AddSongAsync(songDto.Name, songDto.Author);
-            return Ok(songDto);
+
+            var newSong = await _repository.AddSongAsync(name, author);
+
+            return CreatedAtAction(nameof(GetSongs), new { id = newSong.Id }, newSong);
         }
-        
+
         [HttpDelete]
-        public async Task<ActionResult> DeleteSong([FromBody] SongDto songDto)
+        public async Task<IActionResult> DeleteSongContent([FromQuery] string name, [FromQuery] string author)
         {
-            if (string.IsNullOrWhiteSpace(songDto.Name) || string.IsNullOrWhiteSpace(songDto.Author))
+            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(author))
             {
-                return BadRequest("Name and Author are required.");
+                return BadRequest("Both name and author are required to delete a song.");
             }
-            await _repository.DeleteSongAsync(songDto.Name, songDto.Author);
+
+            var result = await _repository.DeleteSongAsync(name, author);
+
+            if (!result)
+            {
+                return NotFound("Song not found.");
+            }
+
             return NoContent();
         }
     }
